@@ -1,19 +1,31 @@
-import React, { useContext } from 'react'
-import { CounterContext } from './Context'
+import React, { useContext, useEffect } from 'react'
+import { CounterContext } from '../context/CounterContext'
 
 export const Counter = () => {
-    const {increment,decrement,count} = useContext(CounterContext)
-  return (
+    const {increment,decrement,count,setCount} = useContext(CounterContext)
+    
+
+    useEffect(()=>{
+        const saveCount =localStorage.getItem('count')
+
+        if (saveCount !== null){
+            setCount(Number(saveCount))
+        } 
+    },[setCount])
+
+    useEffect(()=>{
+        localStorage.setItem('count',count) 
+    },[count])
+
+   
+    return (
+
 
     <div>
-         <h1 >COUNT: {count}</h1>
-      {(count >= 10 || count <= 0) && (
-         <h3 style={{ color: "red" }}>Limit Reached</h3>
-            )}  
-   
-    <button style={{marginRight:"10px", fontSize:"20px"}} onClick={increment}> + </button>
+         <h1 >useContext Counter: {count}</h1>
+      
     <button  style={{marginRight:"10px", fontSize:"20px"}} onClick={decrement}> - </button>
-
+    <button style={{marginRight:"10px", fontSize:"20px"}} onClick={increment}> + </button>
    
     </div>)
 }
