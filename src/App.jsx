@@ -13,7 +13,7 @@ function App() {
    <>
     <Counter />
     <UseReduceCounter/>
-    {/* <UseReduceUseContext/> */}
+    <UseReduceUseContext/>
    </>
   )
 }
